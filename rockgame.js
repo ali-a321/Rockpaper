@@ -1,40 +1,63 @@
 
 let computer = ["rock","paper","scissors"]
 
-let answer =  computer[Math.floor(Math.random()*computer.length)];
+let win = "You have beat the computer!"
+let tie = "You have tied!"
+let lose = "You have lost to the computer!"
 
 
 function getComputedChoice() {
+    let answer =  computer[Math.floor(Math.random()*computer.length)];
     return answer
 }
 getComputedChoice()
-console.log(getComputedChoice())
+
+let userScore = parseInt(0)
+let computerScore = parseInt(0)
 
 
 function playRound(playerSelection,computerSelection) {
   
     if (playerSelection == computerSelection) {
-        return "You have tied!"
+        return tie
     }
     if (playerSelection == "rock" && computerSelection == "scissors") {
-        return "You have beat the computer!"
+        userScore ++
+        return win
     }
     if (playerSelection == "scissors" && computerSelection == "paper") {
-        return "You have beat the computer!"
+        userScore ++
+        return win
     }
     if (playerSelection == "paper" && computerSelection == "rock") {
-        return "You have beat the computer!"
+        userScore ++
+        return win
     }
     else {
-        return "You have lost to the computer!"
+        computerScore ++
+        return lose
+       
     }
 
 }
 
-let computerSelection = getComputedChoice()
-let playerSelection = prompt("Please enter rock, papers, or scissors").toLowerCase()
 
+function game(){
+    console.log("Welcome player!")
+    for (let i =0; i<5;i++) {
+        let playerSelection = prompt("Please enter rock, papers, or scissors").toLowerCase();
+        let computerSelection = getComputedChoice()
+        console.log(playRound(playerSelection,computerSelection))
+        console.log("your score is: " + userScore)
+        console.log("computer score is: " + computerScore)
+    }
+}
+console.log(game())
 
-
-console.log(playRound(playerSelection,computerSelection))
-
+if (userScore > computerScore){
+    console.log("You have beat the computer in the best of 5!")
+} if (userScore == computerScore){
+    console.log("You have tied the computer in the best of 5!")
+} else if (userScore <computerScore){
+    console.log("You have lost to the computer in the best of 5!")
+}
